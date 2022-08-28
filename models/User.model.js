@@ -7,8 +7,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,  // -> Ideally, should be unique, but its up to you
-      trim: true,
       match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'],
+      trim: true,
     },
     password: {
       type:String, 
@@ -17,6 +17,7 @@ const userSchema = new Schema(
     role: {
       type:String,
       enum: ['Admin', 'Client', 'Employee'],
+      default: 'Client'
     },
     firstName: {
       type: String,
@@ -34,22 +35,24 @@ const userSchema = new Schema(
       type: Number,
       minLenght: 1,
     },
-    address: {
-      type: String,
-      minLenght: 1,
-    },
-    city: {
-      type: String,
-      minLenght: 1,
-    },
-    state: {
-      type: String,
-      minLenght: 1,
-    },
-    zipCode: {
-      type: Number,
-      minLenght: 1,
-    },
+    address: [
+      {
+       street : {type: String, minLenght: 1}
+      },
+      {
+       houseNumber: {type: Number, minLenght: 1}
+      },
+      {
+        city: {type: String,minLenght: 1,},
+      },
+      {
+        state: {type: String,minLenght: 1,},
+      },
+      {
+        zipCode: {type: Number,minLenght: 1,},
+      },
+    ],
+   
     shippingCard: {
       billingAddress: {
         type: String,
