@@ -13,4 +13,4 @@ exports.createJWT = (user) => {
         role:user.role,
         //firstName:user.firstName,
     }, process.env.JWT_SECRET, {expiresIn:'24h' }).split('.');
-    }
+}
