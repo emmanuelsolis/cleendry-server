@@ -29,6 +29,37 @@ exports.editProfile = (req, res, next) => {
         
         return res.status(500).json({ errorMessage: error.message });
     })
-    
+}
 
+exports.getUserById = async (req, res, next) => {
+    const {id} = req.params;
+    try {
+        const user = await User.findById(id)
+        const newUser = clearRes(user.toObject());
+        res.status(200).json({user:newUser})
+    }catch(err){
+        if (error instanceof mongoose.Error.ValidationError) return res.status(400).json({ errorMessage: error.message });
+        
+        if (error.code === 11000) return res.status(400).json({ errorMessage: "No se encontró el usuario"});
+        
+        return res.status(500).json({ errorMessage: error.message });
+    }
+}
+
+//Eliminar usuario
+exports.deleteAccount = async (req, res, next) => {
+    const {_id} = req.user;
+    try {
+        console.log("objectId", _id)
+        const user = await User.findByIdAndDelete(_id)
+        res.clearCookie("headload");
+        res.clearCookie("signature");
+        res.status(200).json({successMessage: "Usuario eliminado"})
+    }catch(err){
+        if (error instanceof mongoose.Error.ValidationError) return res.status(400).json({ errorMessage: error.message });
+        
+        if (error.code === 11000) return res.status(400).json({ errorMessage: "No se pudo eliminar el usuario"});
+        
+        return res.status(500).json({ errorMessage: error.message });
+    }
 }
