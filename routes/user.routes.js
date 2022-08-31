@@ -12,7 +12,9 @@ router.patch('/edit-profile',verifyToken, editProfile);
 
 // //Read other user
 router.get('/:id/profile', verifyToken, getUserById);
-module.exports = router;
 
 // //Delete
 router.delete('/delete-user',verifyToken, deleteAccount); 
+
+
+module.exports = router;
