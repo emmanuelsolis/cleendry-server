@@ -8,7 +8,11 @@ const washServiceSchema = new Schema(
     },
     price: {
         type: Number,
-        enum:[{'Lavado en domicilio': 100}, {'Recoger para lavado': 150}, {'Lavado de interiores': 700}, {'Pulido y encerado': 400}],
+        enum:[
+          {
+            'Lavado en domicilio': 120, 'Recoger para lavado':150, 'Pulido y encerado':400, 'Lavado de Interiores':700
+          }
+        ],
         required: true,
     },
     description: {
@@ -17,6 +21,7 @@ const washServiceSchema = new Schema(
     },
     photoServiceUrl: {
         type: String,
+        default:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFEJKxq7pndja2HT0cXjs3efebYI9vMyNW4w&usqp=CAU',
         required: true,
     },
     timeToDelivery: {

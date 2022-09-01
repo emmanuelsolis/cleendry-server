@@ -23,26 +23,16 @@ const orderSchema = new Schema(
         minLenght: 1,
         required: true,
     },
-    ServiceAddress: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceCity: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceState: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceZipCode: {
-        type: Number,
-        minLenght: 1,
-        required: true,
-    },
+    shippingAddress:[
+        {
+          street: {type: String, minLenght: 1},
+          houseNumber: {type: Number, minLenght: 1},
+          city: {type: String,minLenght: 1,},
+          state: {type: String,minLenght: 1,},
+          zipCode: {type: Number,minLenght: 1,},
+          required: true,
+        }
+      ],
     ServiceDate: {
         type: Date,
         minLenght: 1,
@@ -91,6 +81,11 @@ const orderSchema = new Schema(
     timeToDeliver: {
         type: Number,
         default:1.5,
+        required: true,
+    },
+    _nearestEmployee: {
+        type: Schema.Types.ObjectId,// _nearestEmployee:req.user._address[0].zipCode
+        ref: "User",
         required: true,
     },
   },

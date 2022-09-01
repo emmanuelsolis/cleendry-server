@@ -35,92 +35,31 @@ const userSchema = new Schema(
       type: Number,
       minLenght: 1,
     },
+    isAvailable: {
+      type: Boolean,
+      enum: [true, false],
+      default: true,
+    },
     address: [
       {
-       street : {type: String, minLenght: 1}
-      },
-      {
-       houseNumber: {type: Number, minLenght: 1}
-      },
-      {
-        city: {type: String,minLenght: 1,},
-      },
-      {
-        state: {type: String,minLenght: 1,},
-      },
-      {
-        zipCode: {type: Number,minLenght: 1,},
+       street : {type: String, minLenght: 1},
+       houseNumber: {type: Number, minLenght: 1},
+       city: {type: String,minLenght: 1,},
+       state: {type: String,minLenght: 1,},
+       zipCode: {type: Number,minLenght: 1,},
       },
     ],
    
-    shippingCard: {
-      billingAddress: {
-        type: String,
-        minLenght: 1,
-      },
-      billingCity: {
-        type: String,
-        minLenght: 1,
-      },
-      billingState: {
-        type: String,
-        minLenght: 1,
-      },
-      billingZipCode: {
-        type: Number,
-        minLenght: 1,
-      },
-      billingPhoneNumber: {
-        type: Number,
-        minLenght: 1,
-      },
-      billingEmail: {
-        type: String,
-        minLenght: 1,
-      },
-      billingCreditCard: {
-        type: Number,
-        minLenght: 1,
-      },
-      billingExpirationDate: {
-        type: String,
-        minLenght: 1,
-      },
-      billingCVV: {
-        type: Number,
-        minLenght: 1,
-      },
-      billingName: {
-        type: String,
-        minLenght: 1,
-      },
-    },
-    shippingInfo:{
-      shippingAddress: {
-        type: String,
-        minLenght: 1,
-      },
-      shippingCity: {
-        type: String,
-        minLenght: 1,
-      },
-      shippingState: {
-        type: String,
-        minLenght: 1,
-      },
-      shippingZipCode: {
-        type: Number,
-        minLenght: 1,
-      },
-      shippingPhoneNumber: {
-        type: Number,
-        minLenght: 1,
-      },
-      shippingEmail: {
-        type: String,
-        minLenght: 1,
-      },
-    },
+    billingCard: [
+      {
+        cardNumber: {type: Number, minLenght: 10, required: true},
+        cardName: {type: String, minLenght: 1, required: true},
+        expirationDate: {type: Date, required: true},
+        cvv: {type: Number, minLenght: 3, required: true},
+        billingAddress: {type: String, required: true,},
+        billingEmail: {type: String, required: true}
+      }
+    ],  
     imageUrl:{
       type: String,
       default: "https://res.cloudinary.com/dhgfid3ej/image/upload/v1558806705/asdsadsa_iysw1l.jpg"
