@@ -4,9 +4,9 @@ const { clearRes } = require('../utils/utils')
 const cloudinary = require('cloudinary')
 
 exports.createService = async (req, res, next) => {
-    const { typeService, price, description, photoServiceUrl, timeToDelivery } = req.body;
+    const { typeService, price, description, photoServiceUrl, deliverTime } = req.body;
     try {
-        const service = await WashService.create({typeService, price, description, photoServiceUrl, timeToDelivery})
+        const service = await WashService.create({typeService, price, description, photoServiceUrl, deliverTime})
         const newService = clearRes(service.toObject());
         res.status(200).json({ service: newService, successMessage: "Servicio creado" });
     }catch (error) {
@@ -72,3 +72,21 @@ exports.deleteService = async (req, res, next) => {
     }
 }
  
+exports.getAllServices = async (req, res, next) => {
+    try {
+        const services = await WashService.find({}, {
+          __v: 0,
+          createdAt: 0,
+          updatedAt: 0});
+        res.status(200).json({ services });
+        console.log("Los servicios", services);
+    }catch (error) {
+        if (error instanceof mongoose.Error.ValidationError)
+          return res.status(400).json({ errorMessage: error.message });
+    
+        if (error.code === 11000)
+          return res.status(400).json({ errorMessage: "Error al visualizar la lista de servicios" });
+    
+        return res.status(500).json({ errorMessage: error.message });
+      }
+}

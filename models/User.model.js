@@ -64,6 +64,11 @@ const userSchema = new Schema(
       type: String,
       default: "https://res.cloudinary.com/dhgfid3ej/image/upload/v1558806705/asdsadsa_iysw1l.jpg"
     },
+    isAvailable:{
+      type: Boolean,
+      enum: [true, false],
+      default: true,
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
