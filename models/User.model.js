@@ -66,7 +66,10 @@ const userSchema = new Schema(
     },
     isAvailable:{
       type: Boolean,
-      enum: [true, false],
+      default: true,
+    },
+    takeOrder: {
+      type: Boolean,
       default: true,
     }
   },

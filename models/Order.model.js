@@ -3,6 +3,10 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
+    ServiceSatatus: 
+    {type: String,
+    enum: ['Pendiente', 'En proceso', 'Finalizado'],
+    },
     orderNumber: {
         type: Number,
         required: true,
@@ -45,11 +49,10 @@ const orderSchema = new Schema(
     // },
     ServicePrice: {
         type: Number,
-        enum:[
-          {
+        enum:[120, 150, 400, 700],
+          /* {
             'Lavado en domicilio': 120, 'Recoger para lavado':150, 'Pulido y encerado':400, 'Lavado de Interiores':700
-          }
-        ],
+          } */
         // required: true,
     },
     ServiceStatus: {
@@ -84,33 +87,31 @@ const orderSchema = new Schema(
     },
     deliverTime: {
         type: Number,
-        enum: [
-          {
+        enum: [1.5, 2, 4, 2.5],
+        default: 1.5,
+         /*  {
             'Lavado en domicilio':1.5,
             'Recoger para lavado':2, 
             'Lavado de interiores':4, 
             'Pulido y encerado':2.5
-          }
-        ],
+          } */
+        
         // required: true,
     },
-    _clientOwner:{
+    _owner:{
         type: Schema.Types.ObjectId,
         ref: "User",
+        required: true,
     },
     _service:{
         type: Schema.Types.ObjectId,
         ref: "WashService",
     },
-    _nearestEmployee: {
-        type: Schema.Types.ObjectId,// _nearestEmployee:req.user._address[0].zipCode
-        ref: "User",
-    },
-    _whoTakeOrder: {
-        type: Schema.Types.ObjectId,
-        ref: "User", 
-    },
-    _isAvailable: {
+    // _car: {
+    //     type: Schema.Types.ObjectId,// _nearestEmployee:req.user._address[0].zipCode
+    //     ref: "User",
+    // },
+    _employee: {
         type: Schema.Types.ObjectId,
         ref: "User",
     },

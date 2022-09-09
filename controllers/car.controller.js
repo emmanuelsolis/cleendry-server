@@ -14,6 +14,7 @@ exports.registerCar = async (req, res, next) => {
             successMessage: "Carro registrado",
             savedCar: cleanCar
         });
+        console.log(savedCar)
     }catch (error) {
         if (error instanceof mongoose.Error.ValidationError)
           return res.status(400).json({ errorMessage: error.message });
