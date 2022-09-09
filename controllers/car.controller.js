@@ -7,21 +7,14 @@ exports.registerCar = async (req, res, next) => {
     
     const { carName, carModel, carYear, carPlate, carColor, carBrand, carPhoto } = req.body;
     try {
-        const newCar = new Car({
-            carName,
-            carModel,
-            carYear,
-            carPlate,
-            carColor,
-            carBrand,
-            carPhoto
-        });
-        const savedCar = await newCar.save();
+        
+        const savedCar = await Car.create( {carName, carModel, carYear, carPlate, carColor, carBrand, carPhoto, _owner: req.user._id} )
         const cleanCar = clearRes(savedCar.toObject());
         res.status(200).json({
             successMessage: "Carro registrado",
             savedCar: cleanCar
         });
+        console.log(savedCar)
     }catch (error) {
         if (error instanceof mongoose.Error.ValidationError)
           return res.status(400).json({ errorMessage: error.message });
@@ -52,7 +45,7 @@ exports.getOne = async (req, res, next) => {
 
 exports.getCars = async (req, res, next) => {
     try{
-        const cars = await Car.find(null, {
+        const cars = await Car.find({_owner: req.user._id}, {
             __v: 0,
             createdAt: 0,
             updatedAt: 0

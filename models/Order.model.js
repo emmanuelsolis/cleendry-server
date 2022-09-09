@@ -1,14 +1,19 @@
 const { Schema, model } = require("mongoose");
 
+
 const orderSchema = new Schema(
   {
+    ServiceSatatus: 
+    {type: String,
+    enum: ['Pendiente', 'En proceso', 'Finalizado'],
+    },
     orderNumber: {
         type: Number,
         required: true,
         unique: true,
         trim: true,
     },
-   shippingType: {
+   typeService: {
        type: String,
         enum: ['Lavado en domicilio', 'Recoger para lavado', 'Lavado de Interiores', 'Pulido y encerado'], 
         default: 'Lavar en domicilio',
@@ -16,47 +21,39 @@ const orderSchema = new Schema(
    customerName: {
          type: String,
         minLenght: 1,
-        required: true,
+        // required: true,
    },
     customerPhone: {
         type: Number,
         minLenght: 1,
-        required: true,
+        // required: true,
     },
-    ServiceAddress: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceCity: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceState: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceZipCode: {
-        type: Number,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceDate: {
-        type: Date,
-        minLenght: 1,
-        required: true,
-    },
-    ServiceTime: {
-        type: String,
-        minLenght: 1,
-        required: true,
-    },
+    shippingAddress:[
+        {
+          street: {type: String, minLenght: 1},
+          houseNumber: {type: Number, minLenght: 1},
+          city: {type: String,minLenght: 1,},
+          state: {type: String,minLenght: 1,},
+          zipCode: {type: Number,minLenght: 1,},
+        }
+      ],
+    // ServiceDate: {
+    //     type: Date,
+    //     minLenght: 1,
+    //     required: true,
+    // },
+    // ServiceTime: {
+    //     type: String,
+    //     minLenght: 1,
+    //     required: true,
+    // },
     ServicePrice: {
         type: Number,
-        enum:[{'Lavado en domicilio': 100}, {'Recoger para lavado': 150}, {'Lavado de interiores': 700}, {'Pulido y encerado': 400}],
-        required: true, 
+        enum:[120, 150, 400, 700],
+          /* {
+            'Lavado en domicilio': 120, 'Recoger para lavado':150, 'Pulido y encerado':400, 'Lavado de Interiores':700
+          } */
+        // required: true,
     },
     ServiceStatus: {
         type: String,
@@ -66,15 +63,15 @@ const orderSchema = new Schema(
     ServiceDescription: {   
         type: String,
         minLenght: 1,
-        required: true,
+        // required: true,
     },
     subtotal: {
         type: Number,
         minLenght: 1,
-        required: true,
+        // required: true,
     },
     tax: {
-        type: Number,
+        type: Boolean,
         enum: [false, true],
         default: false,
     },
@@ -88,18 +85,43 @@ const orderSchema = new Schema(
         enum: ['Pendiente', 'Pagado'],
         default: 'Pendiente',
     },
-    timeToDeliver: {
+    deliverTime: {
         type: Number,
-        default:1.5,
+        enum: [1.5, 2, 4, 2.5],
+        default: 1.5,
+         /*  {
+            'Lavado en domicilio':1.5,
+            'Recoger para lavado':2, 
+            'Lavado de interiores':4, 
+            'Pulido y encerado':2.5
+          } */
+        
+        // required: true,
+    },
+    _owner:{
+        type: Schema.Types.ObjectId,
+        ref: "User",
         required: true,
     },
-  },
+    _service:{
+        type: Schema.Types.ObjectId,
+        ref: "WashService",
+    },
+    // _car: {
+    //     type: Schema.Types.ObjectId,// _nearestEmployee:req.user._address[0].zipCode
+    //     ref: "User",
+    // },
+    _employee: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+    },
+},
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
-  }
+  },
 );
 
-const Order  = model("Session", orderSchema);
+const Order  = model("Order", orderSchema);
 
 module.exports = Order;

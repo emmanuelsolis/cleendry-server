@@ -3,13 +3,14 @@ const router = require('express').Router();
 const {registerCar,getOne, getCars, editCarInfo, deleteCar} = require('../controllers/car.controller');
 
 //importar los middlewares
+const {verifyToken}  = require('../middleware');
 
 
-router.post('/register-car', registerCar);
+router.post('/register-car',verifyToken, registerCar);
 router.get('/get-one/:carPlate', getOne);
-router.get('/get-cars', getCars);
-router.patch('/edit-car/:id', editCarInfo);
-router.delete('/delete-car/:id', deleteCar);
+router.get('/get-cars',verifyToken, getCars);
+router.patch('/edit-car/:id',verifyToken, editCarInfo);
+router.delete('/delete-car/:id',verifyToken, deleteCar);
 
 
 

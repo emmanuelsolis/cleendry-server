@@ -33,7 +33,11 @@ const carSchema = new Schema(
         type: String,
         required: true,
     },
-
+    _owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    }
 
   },
   {
