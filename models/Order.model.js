@@ -3,8 +3,8 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    ServiceSatatus: 
-    {type: String,
+    ServiceSatatus:{
+    type: String,
     enum: ['Pendiente', 'En proceso', 'Finalizado'],
     },
     orderNumber: {
