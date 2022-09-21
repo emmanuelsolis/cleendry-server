@@ -92,7 +92,8 @@ exports.placeOrder = async (req, res, next) => {
 };
 
 exports.preOrder = async (req, res, next) => {
-  const { ...Order } = req.body;
+  // const { ServiceStatus, ...Order } = req.body;
+  console.log("El req.body:",req.body);
   const { id } = req.params;
   const { _id } = req.user;
   try {
