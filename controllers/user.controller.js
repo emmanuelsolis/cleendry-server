@@ -23,11 +23,14 @@ exports.editProfile = (req, res, next) => {
         res.status(200).json({user:newUser})
     })
     .catch(err => {
-        if (error instanceof mongoose.Error.ValidationError) return res.status(400).json({ errorMessage: error.message });
+        if (err instanceof mongoose.Error.ValidationError) {
+            return res.status(400).json({ errorMessage: err.message });
+        }
         
-        if (error.code === 11000) return res.status(400).json({ errorMessage: "Error al editar su perfil"});
-        
-        return res.status(500).json({ errorMessage: error.message });
+        if (err.code === 11000) {
+            return res.status(400).json({ errorMessage: "Error al editar su perfil"});
+        }
+        return res.status(500).json({ errorMessage: err.message });
     })
 }
 

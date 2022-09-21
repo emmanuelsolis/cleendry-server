@@ -9,7 +9,7 @@ const { clearRes, createJWT } = require('../utils/utils');
 
 exports.signupProcess = async (req, res, next) => {
     const { role, email, password, confirmPassword, ...restUser} = req.body
-    console.log("el Body es: ", req.body);
+    // console.log("el Body es: ", req.body);
     try {
         if(!email.length || !password.length || !confirmPassword.length) {
             return res.status(400).json({errorMessage: 'Los campos no deben estar vacios'});
