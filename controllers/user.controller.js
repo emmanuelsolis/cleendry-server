@@ -12,7 +12,7 @@ exports.getLoggedUser = (req, res, next) => {
 
 exports.editProfile = (req, res, next) => {
     // destructuramos el rol para que nadie lo pueda utilizarK
-    const { rol, password,...resUser } = req.body;
+    const { password,...resUser } = req.body;
     //destructuramos el {_id} del req.user para encontrar el usuario a editar
     const { _id } = req.user;
     
