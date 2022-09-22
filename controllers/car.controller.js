@@ -5,10 +5,10 @@ const cloudinary = require('cloudinary')
 
 exports.registerCar = async (req, res, next) => {
     
-    const { carName, carModel, carYear, carPlate, carColor, carBrand, carPhoto } = req.body;
+    const { carName, carModel, carYear, carPlate, carColor, carBrand, imageUrl } = req.body;
     try {
         
-        const savedCar = await Car.create( {carName, carModel, carYear, carPlate, carColor, carBrand, carPhoto, _owner: req.user._id} )
+        const savedCar = await Car.create( {carName, carModel, carYear, carPlate, carColor, carBrand, imageUrl, _owner: req.user._id} )
         const cleanCar = clearRes(savedCar.toObject());
         res.status(200).json({
             successMessage: "Carro registrado",
