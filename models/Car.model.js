@@ -31,7 +31,6 @@ const carSchema = new Schema(
     },
     imageUrl: {
         type: String,
-        required: true,
     },
     _owner: {
         type: Schema.Types.ObjectId,
