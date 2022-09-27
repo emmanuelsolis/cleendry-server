@@ -5,6 +5,6 @@
         "statusBarItem.hoverBackground": "#ab307e"
     },
     "peacock.remoteColor": "#832561",
-    "editor.fontFamily": "'Antikor Mono','OCR A','Share Tech Mono','Space Mono','Antikor Mono',MonoOne,'Code Saver',Luculent,Metrickal,Consolas, 'Courier New', monospace",
-    "editor.fontSize": 12
+    "editor.fontFamily": "Monolisa,Metrickal,monospace",
+    "editor.fontSize": 14
 }

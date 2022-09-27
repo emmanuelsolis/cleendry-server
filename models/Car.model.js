@@ -29,7 +29,7 @@ const carSchema = new Schema(
         type: String,
         required: true,
     },
-    imageUrl: {
+    carPhoto: {
         type: String,
     },
     _owner: {
