@@ -1,5 +1,3 @@
-// import { useState, useEffect } from 'react';
-
 // import model
 const Order = require("../models/Order.model");
 // import mongoose
@@ -7,36 +5,7 @@ const mongoose = require("mongoose");
 // import utils
 const { clearRes } = require("../utils/utils");
 
-// exports.preOrder = async (req, res, next) => {
-//   // const [inStage, setInStage] = useState(null);
-//   const [isPending, setIsPending] = useState(true);
-//   const [error, setError] = useState(null);
 
-//     useEffect(() => {
-//       const { _id } = req.user;
-//       const {typeService,zipCode, } = req.body;
-
-//       const stageIn = async (user) => {
-//         try {
-//           if(!User.find({_employee, },{role:employee,zipCode:_service.zipCode, _isAvailable:true})){
-//             throw {
-//             err: true,
-//             status: res.status,
-//             statusText: res.status(401).json({ errorMessage: "No hay empleados disponibles" })
-//             };
-//             setIsPending(true);
-//             // setInStage(inStage);
-//             setError({err:false})
-//           }
-//         } catch (error) {
-//           setIsPending(false);
-//           setError(error);
-//           res.status(200).json({successMessage: 'Orden Tomada con exito!!'});
-//         }
-//             }
-//     }, [isPending]);
-//     return {isPending, error};
-// }
 
 exports.placeOrder = async (req, res, next) => {
   const {
@@ -54,9 +23,12 @@ exports.placeOrder = async (req, res, next) => {
     paymentMethod,
     paymentStatus,
     deliverTime,
+    _owner,
+    _service,
+    _employee
+
   } = req.body;
   try {
-    // if(isPending === true){
     const order = await Order.create({
       orderNumber,
       typeService,
@@ -72,14 +44,12 @@ exports.placeOrder = async (req, res, next) => {
       paymentMethod,
       paymentStatus,
       deliverTime,
-      // _employee: req.user._id,
       _owner: req.user._id,
-      // _employee: _id,
-      // _service,
+      _employee: req.user._id,
+      _service: req.data._id
     });
     res.status(200).json({ order });
     console.log("order:", order);
-    // }
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError)
       return res.status(400).json({ errorMessage: error.message });
@@ -91,7 +61,7 @@ exports.placeOrder = async (req, res, next) => {
   }
 };
 
-exports.preOrder = async (req, res, next) => {
+exports.takeOrder = async (req, res, next) => {
   // const { ServiceStatus, ...Order } = req.body;
   console.log("El req.body:",req.body);
   const { id } = req.params;
@@ -116,8 +86,6 @@ exports.preOrder = async (req, res, next) => {
     return res.status(500).json({ errorMessage: error.message });
   }
 };
-
-/* Lista de ordenes para el empeleado  find servicesStatus === Pendiente && el shippingAddress.ZipCode  */
 
 exports.myOrders = async (req, res, next) => {
   const { id } = req.params;
