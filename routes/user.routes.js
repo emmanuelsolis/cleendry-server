@@ -8,7 +8,7 @@ const {verifyToken}  = require('../middleware');
 router.get('/profile', verifyToken, getLoggedUser);
 
 // //Update
-router.patch('/edit-profile', editProfile);    
+router.patch('/edit-profile',verifyToken, editProfile);    
 
 // //Read other user
 router.get('/:id/profile', verifyToken, getUserById);

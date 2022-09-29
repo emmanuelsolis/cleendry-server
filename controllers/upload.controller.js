@@ -19,7 +19,7 @@ exports.uploadProcess = async (req, res, next) => {
     if(req.method === "POST"){
         const urls = [];
         const files = req.files;
-        console.log("Si esta el files",req, req.files, "el req.file", req.file);
+        console.log( "el req.file", req.file);
         if(!req.file){
             for(const file of files){
                 const {path} = file

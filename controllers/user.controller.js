@@ -12,13 +12,15 @@ exports.getLoggedUser = (req, res, next) => {
 
 exports.editProfile = (req, res, next) => {
     // destructuramos el rol para que nadie lo pueda utilizarK
+    console.log("hey, si entreeeeee")
     const { password,...resUser } = req.body;
     //destructuramos el {_id} del req.user para encontrar el usuario a editar
     const { _id } = req.user;
-    
+    console.log("EL REQQQUSSSER", req.user)
     User.findByIdAndUpdate(_id, {...resUser}, {new:true})
     .then(user => {
-        const newUser = clearRes(user.toObject());
+        console.log('yo soy yser de promise', user)
+        const newUser = clearRes(user.toObject());//error
         console.log("newUser", newUser)
         res.status(200).json({user:newUser})
     })
@@ -41,11 +43,11 @@ exports.getUserById = async (req, res, next) => {
         const newUser = clearRes(user.toObject());
         res.status(200).json({user:newUser})
     }catch(err){
-        if (error instanceof mongoose.Error.ValidationError) return res.status(400).json({ errorMessage: error.message });
+        if (err instanceof mongoose.Error.ValidationError) return res.status(400).json({ errorMessage: err.message });
         
-        if (error.code === 11000) return res.status(400).json({ errorMessage: "No se encontró el usuario"});
+        if (err.code === 11000) return res.status(400).json({ errorMessage: "No se encontró el usuario"});
         
-        return res.status(500).json({ errorMessage: error.message });
+        return res.status(500).json({ errorMessage: err.message });
     }
 }
 

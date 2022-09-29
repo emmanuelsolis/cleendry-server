@@ -1,7 +1,7 @@
 const router = require("express").Router();
 //importar los controladores
 const {
-  preOrder,
+  takeOrder,
   placeOrder,
   myOrders,
   workOrders,
@@ -13,7 +13,7 @@ const {
 //importar los middlewares
 const { verifyToken, checkRole } = require("../middleware");
 
-router.patch("/pending/:id", verifyToken, checkRole(["Employee"]), preOrder);
+router.patch("/pending/:id", verifyToken, checkRole(["Employee"]), takeOrder);
 router.post("/place", verifyToken, checkRole(["Client"]), placeOrder);
 router.get("/client-orders", verifyToken, checkRole(["Client"]), myOrders);
 router.get("/work-orders", verifyToken, checkRole(["Employee"]), workOrders);
