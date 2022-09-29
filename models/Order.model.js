@@ -6,6 +6,7 @@ const orderSchema = new Schema(
     serviceSatatus:{
     type: String,
     enum: ['Pendiente', 'En proceso', 'Finalizado'],
+    default: 'Pendiente',
     },
     orderNumber: {
         type: Number,
@@ -55,12 +56,7 @@ const orderSchema = new Schema(
           } */
         // required: true,
     },
-    serviceStatus: {
-        type: String,
-        enum: ['Pendiente', 'En proceso', 'Finalizado'],
-        default: 'Pendiente',
-    },
-    serviceDescription: {   
+       serviceDescription: {   
         type: String,
         minLenght: 1,
         // required: true,

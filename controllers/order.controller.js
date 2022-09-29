@@ -8,6 +8,7 @@ const { clearRes } = require("../utils/utils");
 
 
 exports.placeOrder = async (req, res, next) => {
+  const { _id } = req.params;
   const {
     orderNumber,
     typeService,
@@ -23,10 +24,6 @@ exports.placeOrder = async (req, res, next) => {
     paymentMethod,
     paymentStatus,
     deliverTime,
-    _owner,
-    _service,
-    _employee
-
   } = req.body;
   try {
     const order = await Order.create({
@@ -45,8 +42,7 @@ exports.placeOrder = async (req, res, next) => {
       paymentStatus,
       deliverTime,
       _owner: req.user._id,
-      _employee: req.user._id,
-      _service: req.data._id
+      // _service: req.data._id
     });
     res.status(200).json({ order });
     console.log("order:", order);

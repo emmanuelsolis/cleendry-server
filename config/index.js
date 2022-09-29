@@ -1,3 +1,7 @@
+var bodyParser = require('body-parser');
+// app.use(bodyParser.json());
+
+// app.use(bodyParser.urlencoded({ extended: true }));
 // We reuse this import in order to have access to the `body` property in requests
 const express = require("express");
 
