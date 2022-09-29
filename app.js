@@ -1,3 +1,5 @@
+var bodyParser = require('body-parser');
+
 // ℹ️ Gets access to environment variables/settings
 // https://www.npmjs.com/package/dotenv
 require("dotenv/config");

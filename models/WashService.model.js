@@ -7,12 +7,8 @@ const washServiceSchema = new Schema(
         enum:['Lavado en domicilio', 'Recoger para lavado', 'Lavado de Interiores', 'Pulido y encerado'],
     },
     price: {
-        type: Number,
-        enum:[
-          {
-            'Lavado en domicilio': 120, 'Recoger para lavado':150, 'Pulido y encerado':400, 'Lavado de interiores':700
-          }
-        ],
+      type: Number,
+        enum:[120, 150, 400, 700],
         required: true,
     },
     description: {
@@ -27,12 +23,13 @@ const washServiceSchema = new Schema(
     deliverTime: {
         type: Number,
         enum: [
-          {
-            'Lavado en domicilio':1.5,
-            'Recoger para lavado':2, 
-            'Lavado de interiores':4, 
-            'Pulido y encerado':2.5
-          }
+          // {
+          //   'Lavado en domicilio':1.5,
+          //   'Recoger para lavado':2, 
+          //   'Lavado de interiores':4, 
+          //   'Pulido y encerado':2.5
+          // }
+          1.5, 2, 4, 2.5
         ],
         required: true,
     },

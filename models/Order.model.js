@@ -3,9 +3,10 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    ServiceSatatus:{
+    serviceSatatus:{
     type: String,
     enum: ['Pendiente', 'En proceso', 'Finalizado'],
+    default: 'Pendiente',
     },
     orderNumber: {
         type: Number,
@@ -47,7 +48,7 @@ const orderSchema = new Schema(
     //     minLenght: 1,
     //     required: true,
     // },
-    ServicePrice: {
+    servicePrice: {
         type: Number,
         enum:[120, 150, 400, 700],
           /* {
@@ -55,12 +56,7 @@ const orderSchema = new Schema(
           } */
         // required: true,
     },
-    ServiceStatus: {
-        type: String,
-        enum: ['Pendiente', 'En proceso', 'Finalizado'],
-        default: 'Pendiente',
-    },
-    ServiceDescription: {   
+       serviceDescription: {   
         type: String,
         minLenght: 1,
         // required: true,
